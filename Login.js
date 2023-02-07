@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, Touchable, TouchableOpacity} from 'react-native';
 import Background from './Background';
 import Btn from './Btn';
@@ -6,6 +6,26 @@ import {darkGreen} from './Constants';
 import Field from './Field';
 
 const Login = (props) => {
+
+  const [userName,setUserName] = useState("")
+  const [password,setPassword] = useState("")
+
+  const Submit= () =>{
+    var nameRegex = /^[a-zA-Z\-]+$/;
+    var validUsername = userName.match(nameRegex);
+    if(validUsername == null){
+        alert("username name is not valid. Only characters A-Z, a-z and '-' are  acceptable.");
+    
+    }
+    else if(password==""){
+      alert("Enter password");
+    }
+    else{
+      props.navigation.navigate("H1")
+    }
+
+  }
+
   return (
     <Background>
       <View style={{alignItems: 'center', width: 460}}>
@@ -42,15 +62,22 @@ const Login = (props) => {
           <Field
             placeholder="Email / Username"
             keyboardType={'email-address'}
+            value={userName}
+            onChangeText={(D)=>setUserName(D)}
           />
-          <Field placeholder="Password" secureTextEntry={true} />
+          <Field 
+            placeholder="Password" 
+            secureTextEntry={true} 
+            value={password}
+            onChangeText={(D)=>setPassword(D)}
+          />
           <View
             style={{alignItems: 'flex-end', width: '78%', paddingRight: 16, marginBottom: 200}}>
             <Text style={{color: '#221f29', fontWeight: 'bold', fontSize: 16}}>
               Forgot Password ?
             </Text>
           </View>
-          <Btn textColor='white' bgColor={'#221f29'} btnLabel="Login" Press={() => props.navigation.navigate('H1')} />
+          <Btn textColor='white' bgColor={'#221f29'} btnLabel="Login" Press={() => Submit()}/>
           <View style={{ display: 'flex', flexDirection :'row', justifyContent: "center" }}>
             <Text style={{ fontSize: 16, fontWeight:"bold" }}>Don't have an account ? </Text>
             <TouchableOpacity onPress={() => props.navigation.navigate("Signup")}>
