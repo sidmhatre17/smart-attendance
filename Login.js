@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Touchable, TouchableOpacity} from 'react-native';
+import {View, Text, Touchable, TouchableOpacity,Dimensions} from 'react-native';
 import Background from './Background';
 import Btn from './Btn';
 import {darkGreen} from './Constants';
@@ -9,6 +9,11 @@ const Login = (props) => {
 
   const [userName,setUserName] = useState("")
   const [password,setPassword] = useState("")
+
+
+  const windowWidth = Dimensions.get('screen').width;
+  const windowHeight = Dimensions.get('screen').height;
+  
 
   const Submit= () =>{
     var nameRegex = /^[a-zA-Z\-]+$/;
