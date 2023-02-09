@@ -4,7 +4,8 @@ import Background from './Background';
 import Btn from './Btn';
 import { darkGreen, green } from './Constants';
 
-const {dheight,dwidth}=Dimensions.get('window')
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const Home = (props) => {
   return (
     <Background>
