@@ -1,22 +1,32 @@
 import React, {useState, useEffect} from 'react';
 import {TextInput} from 'react-native';
-import {View, StyleSheet, Text,ImageBackground} from 'react-native';
+import {View, StyleSheet, Text,ImageBackground,Dimensions} from 'react-native';
 import Background from './Background';
 import Btn from './Btn';
 import Field from './Field';
 
+let otpv;
+
 const H1 = props => {
 
-    const submit = ()=>{
-        if (otp==1234){
-            props.navigation.navigate("qr")
-        }
-        else{
-            alert("Invalid OTP");
-        }
-    }
+    const windowWidth = Dimensions.get('screen').width;
+    const windowHeight = Dimensions.get('screen').height;
 
-    const [otp,SetOtp]= useState("")
+    const submit = ()=>{
+        otpv=otp;
+        props.navigation.navigate("qr")
+        // if (otp==1234){
+          
+            
+           
+        // }
+        // else{
+        //     alert("Invalid OTP");
+        // }
+    }
+        
+    const [otp,SetOtp]= useState("");
+    
   return (
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -25,14 +35,17 @@ const H1 = props => {
             <Text style={{fontSize: 40, color:'#221f29', fontWeight: 'bold'}}>
             Enter the OTP
             </Text>
-            <Field 
-                placeholder="OTP" 
-                keyboardType={'numeric'}
-                value={otp}
-                onChangeText={(D)=>SetOtp(D)}
+            <View style={{marginLeft:windowWidth - 290}}>
+                <Field 
+                    placeholder="OTP" 
+                    keyboardType={'number-pad'}
+                    value={otp}
+                    onChangeText={(D)=>{SetOtp(D)}}
                  
-            />
-            <Btn textColor='white' bgColor={'#221f29'} btnLabel="submit OTP" Press={() => submit()}/>
+                />
+            </View>
+            
+            <Btn textColor='white' bgColor={'#221f29'} btnLabel="submit OTP" Press={() => submit(otp)}/>
 
 
 
@@ -42,4 +55,5 @@ const H1 = props => {
   );
 };
 
+export {otpv};
 export default H1;

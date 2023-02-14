@@ -40,6 +40,7 @@ const Login = (props) => {
             fontSize: 64,
             fontWeight: 'bold',
             marginVertical: 20,
+            marginRight:windowWidth -290
           }}>
           Login
         </Text>
@@ -52,7 +53,7 @@ const Login = (props) => {
             paddingTop: 100,
             alignItems: 'center',
           }}>
-          <Text style={{fontSize: 40, color:'#221f29', fontWeight: 'bold'}}>
+          <Text style={{fontSize: 40, color:'#221f29', fontWeight: 'bold', marginRight:windowWidth -290}}>
             Welcome Back
           </Text>
           <Text
@@ -61,6 +62,7 @@ const Login = (props) => {
               fontSize: 19,
               fontWeight: 'bold',
               marginBottom: 20,
+              marginRight:windowWidth -290
             }}>
             Login to your account
           </Text>
@@ -78,12 +80,14 @@ const Login = (props) => {
           />
           <View
             style={{alignItems: 'flex-end', width: '78%', paddingRight: 16, marginBottom: 200}}>
-            <Text style={{color: '#221f29', fontWeight: 'bold', fontSize: 16}}>
+            <Text style={{color: '#221f29', fontWeight: 'bold', fontSize: 16, marginRight:windowWidth -320}}>
               Forgot Password ?
             </Text>
           </View>
-          <Btn textColor='white' bgColor={'#221f29'} btnLabel="Login" Press={() => Submit()}/>
-          <View style={{ display: 'flex', flexDirection :'row', justifyContent: "center" }}>
+          <View style={{marginRight:windowWidth -290}}> 
+            <Btn textColor='white' bgColor={'#221f29'} btnLabel="Login" Press={() => Submit()}/>
+          </View>
+          <View style={{ display: 'flex', flexDirection :'row', justifyContent: "center",marginRight:windowWidth -290 }}>
             <Text style={{ fontSize: 16, fontWeight:"bold" }}>Don't have an account ? </Text>
             <TouchableOpacity onPress={() => props.navigation.navigate("Signup")}>
             <Text style={{ color: 'grey', fontWeight: 'bold', fontSize: 16 }}>Signup</Text>
