@@ -28,13 +28,22 @@ const url ="http://192.168.137.1:8000/api/mark_attendance/"
     console.log(otpv)
     axios.post(url,state)
       .then(response =>{
+        if (response.status==200){
+          props.navigation.navigate('Final')
+        }
+        else{
+          props.navigation.navigate('Ic')
+        }
         console.log(response)
         {<View>
-           <Text style={styles.maintext}>{response}</Text>
+           <Text style={styles.maintext}>{response.status}</Text>
         </View>}
+     
       })
       .catch(error =>{
+        props.navigation.navigate('Ic')
         console.log(error.response.data)
+        
       })
 
   }
@@ -87,7 +96,10 @@ const url ="http://192.168.137.1:8000/api/mark_attendance/"
       <Text style={styles.maintext}>{text}</Text>
 
       {<Button title={'Submit'} onPress={Submit} color='tomato' />}
+      <View style={{marginTop:10}}>
       {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
+      </View>
+     
       
     </View>
   );

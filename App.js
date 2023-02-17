@@ -7,6 +7,8 @@ import Login from './Login';
 import qr from './qr'
 import H1 from './H1'
 import otp from './otp'
+import Final from './final'
+import Ic from './Ic'
 
 
 
@@ -19,9 +21,12 @@ function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Ic" component={Ic} />
+        <Stack.Screen name="Final" component={Final} />
         <Stack.Screen name="H1" component={H1} />
         <Stack.Screen name="otp" component={otp} />
         <Stack.Screen name="qr" component={qr} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
