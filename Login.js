@@ -18,12 +18,13 @@ const Login = (props) => {
   const Submit= () =>{
     var nameRegex = /^[a-zA-Z\-]+$/;
     var validUsername = userName.match(nameRegex);
-    if(validUsername == null){
+    if (userName==""|| password==""){
+      alert("Some of the fields are empty.Please fill all the fields");
+    }
+
+    else if(validUsername == null){
         alert("username name is not valid. Only characters A-Z, a-z and '-' are  acceptable.");
     
-    }
-    else if(password==""){
-      alert("Enter password");
     }
     else{
       props.navigation.navigate("H1")

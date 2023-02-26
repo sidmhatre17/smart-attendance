@@ -20,7 +20,7 @@ export default function QR(props) {
 
 }
 
-const url ="http://192.168.137.1:8000/api/mark_attendance/"
+const url ="http://192.168.43.5:8000/api/mark_attendance/"
 
 // state = JSON.stringify(state)
   
