@@ -21,6 +21,7 @@ const Final = props => {
                     marginHorizontal: windowWidth -380
                     }}>
                 Attendance marked successfully
+                {console.log('SUCCESS')}
                 </Text>
             </View>
 

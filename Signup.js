@@ -4,10 +4,16 @@ import Background from './Background';
 import Btn from './Btn';
 import {darkGreen} from './Constants';
 import Field from './Field';
+import {auth} from "./firebase"
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
+
+
 
 const Signup = props => {
 
-  
+
+  // const auth = getAuth();
   const windowWidth = Dimensions.get('screen').width;
   const windowHeight = Dimensions.get('screen').height;
 
@@ -19,17 +25,21 @@ const Signup = props => {
   const [phone,setPhone] = useState("")
 
 
+ 
+
+
   const Signup= () =>{
+
     var nameRegex = /^[a-zA-Z\-]+$/;
     var validUsername = username.match(nameRegex);
     if (firstname=="" || lastname=="" || username=="" || phone=="" || password=="" || cpassword==""){
       alert("Some of the fields are empty.Please fill all the fields");
     }
   
-    else if(validUsername == null){
-        alert("username name is not valid. Only characters A-Z, a-z and '-' are  acceptable.");
+    // else if(validUsername == null){
+    //     alert("username name is not valid. Only characters A-Z, a-z and '-' are  acceptable.");
     
-    }
+    // }
     else if(password==""){
       alert("Enter the password");
     }
@@ -38,7 +48,23 @@ const Signup = props => {
       alert('The password and confirmation password do not match.')
     }
     else{
-      props.navigation.navigate("Login")
+
+      createUserWithEmailAndPassword(auth, username, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+         props.navigation.navigate("Login")
+        // ...
+        })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage)
+        // ..
+      });
+      
+    
+      // 
     }
 
   }

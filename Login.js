@@ -4,6 +4,8 @@ import Background from './Background';
 import Btn from './Btn';
 import {darkGreen} from './Constants';
 import Field from './Field';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {auth} from "./firebase"
 
 const Login = (props) => {
 
@@ -16,18 +18,28 @@ const Login = (props) => {
   
 
   const Submit= () =>{
-    var nameRegex = /^[a-zA-Z\-]+$/;
+    var nameRegex = /^[@a-zA-Z\-]+$/;
     var validUsername = userName.match(nameRegex);
     if (userName==""|| password==""){
       alert("Some of the fields are empty.Please fill all the fields");
     }
 
-    else if(validUsername == null){
-        alert("username name is not valid. Only characters A-Z, a-z and '-' are  acceptable.");
-    
-    }
+    // 
     else{
-      props.navigation.navigate("H1")
+            signInWithEmailAndPassword(auth, userName, password)
+            .then((userCredential) => {
+              // Signed in 
+            const user = userCredential.user;
+            props.navigation.navigate("H1")
+            // props.navigation.navigate("H1")
+            // ...
+            })
+              .catch((error) => {
+                  const errorCode = error.code;
+                  const errorMessage = error.message;
+                  alert(errorMessage)
+             });
+     
     }
 
   }
@@ -68,7 +80,7 @@ const Login = (props) => {
             Login to your account
           </Text>
           <Field
-            placeholder="Email / Username"
+            placeholder="Email"
             keyboardType={'email-address'}
             value={userName}
             onChangeText={(D)=>setUserName(D)}

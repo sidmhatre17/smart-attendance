@@ -3,6 +3,9 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios';
 import {otpv} from './otp';
+import { Logs } from 'expo'
+
+Logs.enableExpoCliLogging()
 
 export default function QR(props) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -34,15 +37,15 @@ const url ="http://192.168.43.5:8000/api/mark_attendance/"
         else{
           props.navigation.navigate('Ic')
         }
-        console.log(response)
+        console.log('res',response)
         {<View>
            <Text style={styles.maintext}>{response.status}</Text>
         </View>}
      
       })
       .catch(error =>{
-        props.navigation.navigate('Ic')
-        console.log(error.response.data)
+        props.navigation.navigate('IC')
+        console.log('ee',error.response.data)
         
       })
 
