@@ -1,23 +1,61 @@
+
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios';
 import {otpv} from './otp';
-import { Logs } from 'expo'
+import { Logs } from 'expo';
+import { getAuth } from "firebase/auth";
+import {db} from './firebase';
+import {ref,onValue, Snapshot ,child,get,getDatabase} from 'firebase/database';
+import { log } from 'react-native-reanimated';
 
 Logs.enableExpoCliLogging()
+
+
+
+const useFetchData = () => {
+  const [im, setIm] = useState([]);
+
+  useEffect(() => {
+
+   
+    const imRef = ref(db, 'images/');
+    onValue(imRef, (Snapshot) => {
+      const data = Snapshot.val();
+      console.log(data,'data')
+      const auth = getAuth();
+      const user = auth.currentUser;
+      // uidd = JSON.stringify(user.uid);
+      const uidd=user.uid;
+      console.log(uidd,'uid');
+      // console.log(uidd,'uidd');
+      const strg= data[uidd];;
+      const arr = strg.split("++");
+      console.log(arr[1],'tejasss');
+      setIm(arr[1]);
+    });
+  }, []);
+  return im;
+}
+
+
+
+
+
 
 export default function QR(props) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState('Not yet scanned')
   
-
+  const sid=useFetchData();
+  // console.log(sid,'sid');
   //const otp = JSON.stringify(otpv);
   //const t =JSON.stringify(text)
   const state={
       subject_id: text,
-      student_id: "2c09996d-9da7-4d31-8103-92dcd55aa0c7",
+      student_id: sid,
       attendance_result : "P",
       otp: otpv
 
@@ -36,6 +74,7 @@ const url ="http://192.168.43.5:8000/api/mark_attendance/"
         }
         else{
           props.navigation.navigate('Ic')
+          console.log(response.status,'res-status')
         }
         console.log('res',response)
         {<View>

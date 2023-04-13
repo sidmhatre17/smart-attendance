@@ -7,10 +7,10 @@ import Field from './Field';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from "./firebase"
 
-const Login = (props) => {
-
-  const [userName,setUserName] = useState("")
+const Login = (props,userNamee) => {
+  const [userName,setUserName] = useState("");
   const [password,setPassword] = useState("")
+
 
 
   const windowWidth = Dimensions.get('screen').width;
@@ -30,8 +30,9 @@ const Login = (props) => {
             .then((userCredential) => {
               // Signed in 
             const user = userCredential.user;
+            window.un =userName;
+            // props.navigation.navigate("FaceScan")
             props.navigation.navigate("H1")
-            // props.navigation.navigate("H1")
             // ...
             })
               .catch((error) => {

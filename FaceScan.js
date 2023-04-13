@@ -3,15 +3,48 @@ import { StyleSheet, Text, View, Image, Button,TouchableOpacity,Dimensions } fro
 import { Camera } from 'expo-camera';
 import axios from 'axios';
 import tejas from './assets/tejas.jpeg'
+import {db} from './firebase'
+import {ref,onValue, Snapshot ,child,get,getDatabase} from 'firebase/database'
+import { Logs } from 'expo'
+import { userName } from './Login';
+import { getAuth } from "firebase/auth";
+import { log } from 'react-native-reanimated';
 
+Logs.enableExpoCliLogging();
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
- const FaceScan = props => {
+
+const useFetchData = () => {
+  const [im, setIm] = useState([]);
+
+  useEffect(() => {
+
+   
+    const imRef = ref(db, 'images/');
+    onValue(imRef, (Snapshot) => {
+      const data = Snapshot.val();
+      const auth = getAuth();
+      const user = auth.currentUser;
+      // uidd = JSON.stringify(user.uid);
+      const uidd=user.uid;
+      const strg= data[uidd];;
+      const arr = strg.split("++");
+      setIm(arr[0]);
+    });
+  }, []);
+  return im;
+}
+
+
+
+
+ const FaceScan = (props) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [faceDetected, setFaceDetected] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
   const [buttonPressed, setButtonPressed] = useState(false);
+  
   const cameraRef = useRef(null);
 
    useEffect(() => {
@@ -21,16 +54,23 @@ const windowHeight = Dimensions.get('window').height;
     })();
   }, []);
 
- 
+  const im = useFetchData();
+  // console.log(im,'imageuri');
+
+
+
+
+  
 
   const takePicture = async () => {
     if (cameraRef.current) {
       const photo = await cameraRef.current.takePictureAsync({ quality: 0.5 });
       setCapturedImage(photo);
       setButtonPressed(true);
-  
-      const url2 = "/face_match";
-      const tejasuri=Image.resolveAssetSource(tejas).uri
+      console.log('hii')
+      const url2 = "http://192.168.43.5:5001/face_match";
+      const tejasuri=im;
+      // const tejasuri=Image.resolveAssetSource(tejas).uri
 
       const myuri=Image.resolveAssetSource(photo).uri
 
@@ -47,7 +87,7 @@ const windowHeight = Dimensions.get('window').height;
       });
 
       console.log(dataa);
-      console.log(cameraRef);
+      // console.log(cameraRef);
 
       axios.post(url2, dataa, {
         headers: {
