@@ -18,6 +18,7 @@ import FaceScan from './FaceScan'
 
 
 
+
 const Stack = createNativeStackNavigator();
 
 function App() {
