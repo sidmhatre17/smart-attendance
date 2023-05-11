@@ -2,13 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, Image, Button,TouchableOpacity,Dimensions } from 'react-native';
 import { Camera } from 'expo-camera';
 import axios from 'axios';
-import tejas from './assets/tejas.jpeg'
 import {db} from './firebase'
 import {ref,onValue, Snapshot ,child,get,getDatabase} from 'firebase/database'
 import { Logs } from 'expo'
 import { userName } from './Login';
 import { getAuth } from "firebase/auth";
-import { log } from 'react-native-reanimated';
 
 Logs.enableExpoCliLogging();
 const windowWidth = Dimensions.get('window').width;
@@ -67,8 +65,8 @@ const useFetchData = () => {
       const photo = await cameraRef.current.takePictureAsync({ quality: 0.5 });
       setCapturedImage(photo);
       setButtonPressed(true);
-      console.log('hii')
-      const url2 = "http://192.168.43.5:5001/face_match";
+      // const url2 = "http://192.168.43.5:5001/face_match";
+      const url2= 'https://5487dfd63ebc9f.lhr.life/face_match';
       const tejasuri=im;
       // const tejasuri=Image.resolveAssetSource(tejas).uri
 
@@ -98,7 +96,7 @@ const useFetchData = () => {
         .then((response) => {
           console.log(response.data);
           setHasPermission(null);
-          props.navigation.navigate('qr');
+          props.navigation.navigate('otp');
           // Handle response
         })
         .catch((error) => {

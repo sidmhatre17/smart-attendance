@@ -14,7 +14,8 @@ const H1 = props => {
 
     const submit = ()=>{
         otpv=otp;
-        props.navigation.navigate("FaceScan")
+        // props.navigation.navigate("FaceScan")
+        props.navigation.navigate("qr")
         
         // if (otp==1234){
           

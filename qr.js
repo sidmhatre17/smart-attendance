@@ -8,7 +8,7 @@ import { Logs } from 'expo';
 import { getAuth } from "firebase/auth";
 import {db} from './firebase';
 import {ref,onValue, Snapshot ,child,get,getDatabase} from 'firebase/database';
-import { log } from 'react-native-reanimated';
+
 
 Logs.enableExpoCliLogging()
 
@@ -61,7 +61,8 @@ export default function QR(props) {
 
 }
 
-const url ="http://192.168.43.5:8000/api/mark_attendance/"
+//const url ="http://192.168.43.5:8000/api/mark_attendance/"
+const url ='https://96f9-117-205-11-137.ngrok-free.app/api/mark_attendance/'
 
 // state = JSON.stringify(state)
   
@@ -70,7 +71,8 @@ const url ="http://192.168.43.5:8000/api/mark_attendance/"
     axios.post(url,state)
       .then(response =>{
         if (response.status==200){
-          props.navigation.navigate('Final')
+           props.navigation.navigate('Final')
+         
         }
         else{
           props.navigation.navigate('Ic')

@@ -7,6 +7,8 @@ import Field from './Field';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from "./firebase"
 
+
+
 const Login = (props,userNamee) => {
   const [userName,setUserName] = useState("");
   const [password,setPassword] = useState("")
@@ -15,14 +17,25 @@ const Login = (props,userNamee) => {
 
   const windowWidth = Dimensions.get('screen').width;
   const windowHeight = Dimensions.get('screen').height;
+
+
+
+  
   
 
   const Submit= () =>{
     var nameRegex = /^[@a-zA-Z\-]+$/;
+    const emailRegex = /^[\w-\.]+_[a-z]\d{5}@students.isquareit.edu.in$/;
+    const validEmail = userName.match(emailRegex);
     var validUsername = userName.match(nameRegex);
     if (userName==""|| password==""){
       alert("Some of the fields are empty.Please fill all the fields");
     }
+    else if (!validEmail) {
+      alert(
+        "Invalid email format. Please enter valid email issued by college"
+      );
+    } 
 
     // 
     else{
@@ -31,8 +44,10 @@ const Login = (props,userNamee) => {
               // Signed in 
             const user = userCredential.user;
             window.un =userName;
-            // props.navigation.navigate("FaceScan")
             props.navigation.navigate("H1")
+            //props.navigation.navigate("Attendance_record")
+            //props.navigation.navigate("qr")
+            // props.navigation.navigate("Record")
             // ...
             })
               .catch((error) => {
@@ -92,12 +107,7 @@ const Login = (props,userNamee) => {
             value={password}
             onChangeText={(D)=>setPassword(D)}
           />
-          <View
-            style={{alignItems: 'flex-end', width: '78%', paddingRight: 16, marginBottom: 200}}>
-            <Text style={{color: '#221f29', fontWeight: 'bold', fontSize: 16, marginRight:windowWidth -320}}>
-              Forgot Password ?
-            </Text>
-          </View>
+         
           <View style={{marginRight:windowWidth -290}}> 
             <Btn textColor='white' bgColor={'#221f29'} btnLabel="Login" Press={() => Submit()}/>
           </View>

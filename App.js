@@ -13,6 +13,8 @@ import otp from './otp'
 import Final from './final'
 import Ic from './Ic'
 import FaceScan from './FaceScan'
+import Attendance_record from './attendance_record'
+import Record from './Record'
 
 
 
@@ -28,12 +30,15 @@ function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Attendance_record" component={Attendance_record} />
+        <Stack.Screen name="Record" component={Record} />
         <Stack.Screen name="Ic" component={Ic} />
         <Stack.Screen name="Final" component={Final} />
         <Stack.Screen name="H1" component={H1} />
         <Stack.Screen name="otp" component={otp} />
         <Stack.Screen name="FaceScan" component={FaceScan} />
         <Stack.Screen name="qr" component={qr} />
+       
 
       </Stack.Navigator>
     </NavigationContainer>
