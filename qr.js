@@ -62,7 +62,8 @@ export default function QR(props) {
 }
 
 //const url ="http://192.168.43.5:8000/api/mark_attendance/"
-const url ='https://96f9-117-205-11-137.ngrok-free.app/api/mark_attendance/'
+//const url ='https://96f9-117-205-11-137.ngrok-free.app/api/mark_attendance/'
+const url="https://528b-115-112-64-90.ngrok-free.app/api/mark_attendance/"
 
 // state = JSON.stringify(state)
   

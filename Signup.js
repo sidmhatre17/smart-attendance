@@ -32,7 +32,7 @@ const Signup = props => {
 
     var nameRegex = /^[a-zA-Z\-]+$/;
     const emailRegex = /^[\w-\.]+_[a-z]\d{5}@students.isquareit.edu.in$/;
-    const validEmail = userName.match(emailRegex);
+    const validEmail = username.match(emailRegex);
     var validUsername = username.match(nameRegex);
     if (firstname=="" || lastname=="" || username=="" || phone=="" || password=="" || cpassword==""){
       alert("Some of the fields are empty.Please fill all the fields");

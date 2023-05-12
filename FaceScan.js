@@ -66,7 +66,7 @@ const useFetchData = () => {
       setCapturedImage(photo);
       setButtonPressed(true);
       // const url2 = "http://192.168.43.5:5001/face_match";
-      const url2= 'https://5487dfd63ebc9f.lhr.life/face_match';
+      const url2= 'https://bde69fcf9594e7.lhr.life/face_match';
       const tejasuri=im;
       // const tejasuri=Image.resolveAssetSource(tejas).uri
 
@@ -95,8 +95,17 @@ const useFetchData = () => {
       })
         .then((response) => {
           console.log(response.data);
+          console.log(response.data.match,'mattt');
           setHasPermission(null);
-          props.navigation.navigate('otp');
+          if(response.data.match===true){
+            props.navigation.navigate('otp');
+          }
+          else if(response.data.match===false)
+          {
+            props.navigation.navigate('H1');
+          }
+          
+          
           // Handle response
         })
         .catch((error) => {

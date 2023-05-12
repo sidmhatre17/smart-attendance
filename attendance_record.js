@@ -9,6 +9,14 @@ import axios from 'axios';
 import { getAuth } from "firebase/auth";
 import {db} from './firebase';
 import {ref,onValue, Snapshot ,child,get,getDatabase} from 'firebase/database';
+import Record from './Record';
+
+
+
+
+
+
+
 
 const useFetchData1 = () => {
   const [im, setIm] = useState([]);
@@ -43,6 +51,10 @@ export default function Attendance_record(props) {
     const [date,setdate] =useState(new Date());
     const [showpicker1,setshowpicker1] =useState(false);
     const [showpicker2,setshowpicker2] =useState(false);
+   
+    const [attendanceData, setAttendanceData] = useState([]);
+  
+
 
 
     const sid=useFetchData1();
@@ -102,14 +114,19 @@ export default function Attendance_record(props) {
     
     }
 
-    const url ="https://96f9-117-205-11-137.ngrok-free.app/api/get_record/"
+    const url ="https://528b-115-112-64-90.ngrok-free.app/api/get_record/"
 
     console.log(state,'state')
     axios.post(url,state)
     .then(response =>{
       if (response.status==200){
-        console.log(response.data[0],'response')
-         props.navigation.navigate('Record')
+        console.log(response.data[0],'response');
+        setAttendanceData(response.data); 
+        // <Record data={attendanceData}/>
+        props.navigation.navigate('Record',{attendanceData})
+        // props.setAttendanceRecord(response.data); 
+       /// props.setAttendanceRecord(response.data); 
+        props.navigation.navigate('Record')
        
       }
       else{
@@ -118,11 +135,12 @@ export default function Attendance_record(props) {
       }
    
     })
-    .catch(error =>{
-      props.navigation.navigate('Record')
-      console.log('ee',error.response.data)
+    // .catch(error =>{
+    //   //setAttendanceData(response.data); 
+    //   // props.navigation.navigate('Record')
+    //   console.log('ee',error.response.data)
       
-    })
+    // })
 
 
     };
@@ -133,12 +151,13 @@ export default function Attendance_record(props) {
         style={{
           color: 'black',
           fontSize: 34,
+          width:300,
           fontWeight: 'bold',
           marginTop: 110,
           marginBottom :80,
           marginRight:windowWidth -290
         }}>
-        Check Attendance
+        Check Attendance 
           
       </Text>
     
